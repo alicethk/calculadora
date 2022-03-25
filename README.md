@@ -1,5 +1,5 @@
 # calculadora
-Atividade 1 UC13 - Senac2022
+Atividade 1 e 2 UC13 - Senac2022
 A partir de um arquivo de um projeto React-Native pronto denominado "Calculadora", o objetivo era analisar e corrigir, tendo cuidado com o versionamento e criando ramificações (branches) adequadas de modo que não prejudicassem outras funcionalidades que já estavam funcionando adquadamente. 
 
 
@@ -15,5 +15,5 @@ Execution failed for task ':app:stripDebugDebugSymbols'.
 
 Foi resolvido excluindo o NDK do Android Studio.
 
-
+Na atividade 2, foram feitas algumas estilizações e uso do darkMode.
 
