@@ -3,6 +3,9 @@ import {useState} from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native';
 
 export default function App() {
+  const [darkMode, setDarkMode] = useState(false)
+
+
   // Mapeamento de teclas
   const buttons = ['LIMPAR', 'DEL', '%', '/', 7, 8, 9, "*", 4, 5, 6, '-', 1, 2, 3, '+', 0, '.', '+/-', '=']
 
@@ -43,7 +46,7 @@ export default function App() {
       case 'DEL':
         setCurrentNumber(currentNumber.substring(0, (currentNumber.length - 2)))
         return
-      case 'CLEAR': // Limpa todo o conteúdo
+      case 'LIMPAR': // Limpa todo o conteúdo
         setLastNumber("") 
         setCurrentNumber("") 
         return
@@ -57,35 +60,6 @@ export default function App() {
 
     setCurrentNumber(currentNumber + buttonPressed)
   }
-
-
-  return (
-    <View style={styles.container}>
-
-      {/* Area onde o resultado é exibido */}
-      <View style={styles.results}>
-        <Text style={styles.historyText}>{lastNumber}</Text>
-        <Text style={styles.resultText}>{currentNumber}</Text>
-      </View>
-
-      {/* Area onde os botões são exibidos*/}
-      <View style={styles.buttons}>
-
-        {buttons.map((button) => 
-          button === '=' ? // Mapeamento do botão =
-        <TouchableOpacity onPress={() => handleInput(button)} key={button} style={[styles.button, {backgroundColor: '#3dd0e3'}]}>
-          <Text style={[styles.textButton, {color: "white", fontSize: 30}]}>{button}</Text>
-        </TouchableOpacity>
-          : // Mapeamento dos outros botões
-          <TouchableOpacity onPress={() => handleInput(button)} key={button} style={styles.button}>
-            <Text style={[styles.textButton, {color: typeof(button) === 'number' ? 'black': '#0093a6'}]}>{button}</Text>
-          </TouchableOpacity>
-        )}
-      </View>
-    </View>
-  );
-}
-
 
 // Estilização
 const styles = StyleSheet.create({
@@ -115,7 +89,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   button: {
-    backgroundColor: 'white',
+    borderColor: darkMode ? '#3f4d5b' : "#e5e5e5",
+    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
     minWidth: 90, 
@@ -123,7 +98,41 @@ const styles = StyleSheet.create({
     flex: 2,
   },
   textButton: {
-    color: "#7c7c7c",
+    color: darkMode ? "#b5b7bb" : "#7c7c7c",
     fontSize: 20,
   } 
 });
+
+  return (
+   
+    <View style={styles.container}>
+
+      {/* Area onde o resultado é exibido */}
+      <View style={styles.results}>
+      <TouchableOpacity style={styles.themeButton}>
+          <Entypo name={darkMode ? "light-up" : 'moon'} size={24} color={darkMode ? "white" : 'black'} onPress={() => darkMode ? setDarkMode(false) : setDarkMode(true)} />
+        </TouchableOpacity>
+        <Text style={styles.historyText}>{lastNumber}</Text>
+        <Text style={styles.resultText}>{currentNumber}</Text>
+      </View>
+
+      {/* Area onde os botões são exibidos*/}
+      <View style={styles.buttons}>
+
+        {buttons.map((button) => 
+          button === '=' ? // Mapeamento do botão =
+        <TouchableOpacity onPress={() => handleInput(button)} key={button} style={[styles.button, {backgroundColor: '#3dd0e3'}]}>
+          <Text style={[styles.textButton, {color: "white", fontSize: 30}]}>{button}</Text>
+        </TouchableOpacity>
+          : // Mapeamento dos outros botões
+          <TouchableOpacity onPress={() => handleInput(button)} key={button} style={styles.button}>
+            <Text style={[styles.textButton, {color: typeof(button) === 'number' ? 'black': '#0093a6'}]}>{button}</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+    </View>
+  );
+}
+
+
+
