@@ -7,7 +7,7 @@ export default function App() {
 
 
   // Mapeamento de teclas
-  const buttons = ['LIMPAR', 'DEL', '%', '/', 7, 8, 9, "*", 4, 5, 6, '-', 1, 2, 3, '+', 0, '.', '+/-', '=']
+  const buttons = ['LIMPAR', 'DEL', '%', '/', 7, 8, 9, '*', 4, 5, 6, '-', 1, 2, 3, '+', 0, '.', '+/-', '=']
 
   const [currentNumber, setCurrentNumber] = useState("")
   const [lastNumber, setLastNumber] = useState("")
@@ -28,7 +28,7 @@ export default function App() {
         setCurrentNumber((firstNumber - lastNumber).toString())
         return
       case '*':
-        setCurrentNumber((firstNumber + lastNumber).toString())
+        setCurrentNumber((firstNumber * lastNumber).toString())
         return
       case '/': 
         setCurrentNumber((firstNumber / lastNumber).toString())
@@ -55,10 +55,12 @@ export default function App() {
         calculator()
         return
       case '+/-':
+        setCurrentNumber(currentNumber + buttonPressed)
+
         return
     }
-
     setCurrentNumber(currentNumber + buttonPressed)
+
   }
 
 // Estilização
@@ -89,7 +91,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   button: {
-    borderColor: darkMode ? '#3f4d5b' : "#e5e5e5",
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -110,7 +111,7 @@ const styles = StyleSheet.create({
       {/* Area onde o resultado é exibido */}
       <View style={styles.results}>
       <TouchableOpacity style={styles.themeButton}>
-          <Entypo name={darkMode ? "light-up" : 'moon'} size={24} color={darkMode ? "white" : 'black'} onPress={() => darkMode ? setDarkMode(false) : setDarkMode(true)} />
+       
         </TouchableOpacity>
         <Text style={styles.historyText}>{lastNumber}</Text>
         <Text style={styles.resultText}>{currentNumber}</Text>
