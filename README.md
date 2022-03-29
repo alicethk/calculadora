@@ -17,3 +17,4 @@ Foi resolvido excluindo o NDK do Android Studio.
 
 Na atividade 2, foram feitas algumas estilizações e uso do darkMode.
 
+![Screenshot_111](https://user-images.githubusercontent.com/92600240/160515667-ce636aea-c035-4d10-b46e-b6bcd80536d2.png)
